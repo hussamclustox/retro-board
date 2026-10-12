@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Dark mode follows a `.dark` class on <html>, set per user (see ThemeToggle). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Muted green used for the light theme's page background and chrome. */
+@theme {
+  --color-sage-50: #f3f7f4;
+  --color-sage-100: #e1ebe4;
+  --color-sage-200: #cadbcf;
+  --color-sage-300: #a9c3b1;
+
+  /* Board width: wider than 7xl (80rem), short of full screen. Enables `max-w-8xl`. */
+  --container-8xl: 96rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  @apply bg-sage-100 text-slate-900 font-sans dark:bg-slate-950 dark:text-slate-100;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.dark {
+  color-scheme: dark;
+}
+
+/* Thin scrollbars for column lists */
+.scroll-thin {
+  scrollbar-width: thin;
 }
